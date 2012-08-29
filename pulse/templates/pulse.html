@@ -1,0 +1,24 @@
+{% extends "layout_pulse.html" %}
+
+{% block body %}
+    <h1>pulse</h1>
+
+    <ol>
+    {% for r in requests %}
+        <li>    
+            {{r[1]}} &raquo; {{r[4]}}
+        <ul>
+            <li>{{r[2]}}</li>
+            <li>{{r[3]}}</li>
+            <li>{{r[5]}}</li>
+        </ul>
+        </li>
+    {% endfor %}
+        
+    </ol>
+{% endblock %}
+
+{% block sidebar %}
+  <h3>Navigation</h3>
+  
+{% endblock %}

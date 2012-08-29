@@ -1,0 +1,106 @@
+* {margin:0; padding:0;}
+
+body {font-family: Helvetica, Arial, sans-serif; width:800px; margin:0 auto;}
+
+h1, h2, h3, h4, h5, h6 {font-weight:normal;}
+h2 {/*margin-top:12px;*/ font-size:13.5pt;}
+
+header {color:#404040; border-bottom:1px solid #404040; overflow:auto;}
+
+header nav {float:right; display:block; font-size:8pt; padding-bottom:6px; margin-top:2px;}
+
+header nav a {text-decoration: none;}
+header nav a.selected {font-weight:bold;}
+
+a {color:#336699; text-decoration:none;}
+a:hover {text-decoration: underline;}
+
+ul, ol
+{
+    list-style-position: inside;
+}
+
+header nav ul {overflow:auto; list-style-type: none;}
+
+header nav ul li {float:left; margin-left: 10px;}
+
+section#page_content {width:540px; min-height: 400px; float:left;}
+
+section#sidebar {float:right; width:240px; background-color:#eeeeee; padding:0px 0px 8px 8px; /*text-align: right;*/ margin:0px;}
+
+section#sidebar ul {list-style-type: none; font-size:8pt; max-height:110px; overflow:auto;}
+section#sidebar h3 {text-align:right; margin:6px 0px 2px 0px;}
+section#sidebar h4 {font-size:11pt; margin-top:12px;}
+
+div.flashmessage
+{
+    text-align:center;
+    padding:2px;
+}
+
+div.info
+{
+    background-color:#8CA533;
+    color:white;
+}
+
+div.error
+{
+    background-color:#DB4767;
+    color:black;
+}
+
+footer {font-size:8pt; text-align: center; border-top: 1px solid #404040; clear:both;}
+
+section#page_content section {float:left;}
+/*section#page_content section:first-child {width:550px;}*/
+
+section#page_content dl, section#page_content p 
+{
+    color:#444;
+    font-size:9.5pt;
+    padding:8px;
+}
+
+section#page_content textarea {width:100%; height:400px}
+
+dl#projectList {font-size: 8pt; padding-right:8px}
+dl#projectList dd {color: #bbb; margin-bottom: 4px; overflow:auto}
+dl#projectList dd a {display: inline-block; float: right}
+
+section#page_content p#breadcrumb {background-color:#eeeeee; display:inline-block; padding:4px 24px 4px 12px;}
+
+section table 
+{
+	border-collapse:collapse;
+	line-height:1.4em;
+	text-align:justify;
+	margin:1em auto 0.4em auto;
+}
+section table td, section table th
+{
+	border:1px solid #7b797a;
+	padding:4px;
+	max-width:380px;
+	text-align:center;
+}
+section table th {background:#7b797a; color:white;}
+
+section table input
+{
+	padding:0.1em;
+	margin:0;
+	width:90px;
+}
+section table select {width:94px;}
+
+section table input.btn
+{
+	width:55px;
+}
+
+section table ul
+{
+	padding:0;
+	list-style-type:none;
+}
