@@ -24,7 +24,7 @@ def log_request():
         
     database.log_request(request_url, remote_addr, user_agent, referrer)
     
-    r = make_response(redirect(url_for('pulse.static', filename='pulse.gif')))
+    r = make_response(mod.send_static_file('pulse.gif'))
     r.headers.add('Last-Modified', datetime.datetime.now())
     r.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
     r.headers.add('Pragma', 'no-cache')
