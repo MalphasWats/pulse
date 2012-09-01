@@ -74,14 +74,12 @@ section table
 {
 	border-collapse:collapse;
 	line-height:1.4em;
-	text-align:justify;
 	margin:1em auto 0.4em auto;
 }
 section table td, section table th
 {
 	border:1px solid #7b797a;
 	padding:4px;
-	max-width:380px;
 	text-align:center;
 }
 section table th {background:#7b797a; color:white;}

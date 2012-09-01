@@ -2,20 +2,37 @@
 
 {% block body %}
     <h1>pulse</h1>
-
-    <ol>
+    
+    <h2>Visit Totals</h2>
+    <table>
+        <tr><th>Ever</th><th>Last Month</th><th>This Month</th><th>Today</th></tr>
+        <tr><td>{{visits[0]}}</td><td>{{visits[1]}}</td><td>{{visits[2]}}</td><td>{{visits[3]}}</td>
+    </table>
+    
+    <h2>Page Views</h2>
+    <table>
+        <tr><th>URL</th><th>Visits</th></tr>
+        {% for p in pages %}
+        <tr><td>{{p[0]}}</td><td>{{p[1]}}</td></tr>
+        {% endfor %}
+    </table>
+    
+    
+    <h2>Raw Data</h2>
+    <table style="font-size:50%;">
+    <tr><th>Request ID</th><th>Request URL</th><th>Referrer</th><th>Remote Address</th><th>User Agent</th><th>Timestamp</th></tr>
     {% for r in requests %}
-        <li>    
-            {{r[1]}} &raquo; {{r[4]}}
-        <ul>
-            <li>{{r[2]}}</li>
-            <li>{{r[3]}}</li>
-            <li>{{r[5]}}</li>
-        </ul>
-        </li>
+        <tr>
+            <td>{{r[0]}}</td>
+            <td>{{r[1]}}</td>
+            <td style="word-wrap:break-word; max-width:300px;">{{r[4]}}</td>
+            <td>{{r[2]}}</td>
+            <td>{{r[3]}}</td>
+            <td>{{r[5]}}</td>
+        </tr>
     {% endfor %}
         
-    </ol>
+    </table>
 {% endblock %}
 
 {% block sidebar %}

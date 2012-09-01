@@ -12,7 +12,11 @@ mod = Blueprint('pulse', __name__, template_folder='templates', static_folder='s
 @mod.route('/')
 @login_required
 def home():
-    return render_template('pulse.html', requests=database.get_requests())
+    return render_template('pulse.html',
+                           visits=database.get_visit_totals(),
+                           pages=database.get_page_visits(),
+                           requests=database.get_requests()
+                           )
     
 
 @mod.route('/log/')
