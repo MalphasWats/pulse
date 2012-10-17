@@ -61,7 +61,7 @@ def get_visit_totals():
     return (ever, last_month, this_month, today)
     
     
-def get_visit_total_between(start_date='2012-08-29', end_date=datetime.date.today().strftime('%Y-%m-%d 23:59:59')): #'
+def get_visit_total_between(start_date='2012-08-29', end_date=datetime.date.today().strftime('%Y-%m-%d 23:59:59')):
     conn = connect()
     curs = conn.cursor()
     
