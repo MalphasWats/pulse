@@ -1,12 +1,12 @@
 import psycopg2
-from pyDimension import app as pyDimension
+from instruments import app
 
 import datetime
 
 #DSN = 'dbname=db_name user=user_name password=password'
 
 def connect():
-    DSN = pyDimension.config['PULSE_DSN']
+    DSN = app.config['PULSE_DSN']
 
     conn = psycopg2.connect(DSN)
     
