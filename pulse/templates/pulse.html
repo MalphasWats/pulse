@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 
+{% block html_title %}Pulse{% endblock %}
+{% block title %}Pulse{% endblock %}
+
 {% block content %}
     
     <h2>Visit Totals</h2>
@@ -35,4 +38,12 @@
 {% endblock %}
 
 {% block sidebar %}
+<section>
+    <h3>Google Searches</h3>
+    <table style="font-size:10pt">
+    <tr><th>Search String</th><th>Count</th></tr>
+    {% for s in search_terms %}
+    <tr><td>{{s[0]}}</td><td>{{s[1]}}</td></tr>
+    {% endfor %}
+</section>
 {% endblock %}
