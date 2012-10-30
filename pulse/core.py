@@ -1,14 +1,11 @@
-from flask import (Blueprint, request, session, redirect, 
-                   url_for, abort, render_template, flash, make_response)
+from flask import request, session, redirect, url_for, abort, render_template, flash, make_response
                    
-import database
 import datetime
 
 from instruments.core import public_endpoint
 
-blueprint = Blueprint('pulse', __name__, template_folder='templates', static_folder='static')
-
-LABEL = 'Pulse'
+from pulse import blueprint
+import database
 
 
 @blueprint.route('/')
