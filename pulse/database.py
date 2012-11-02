@@ -1,5 +1,6 @@
 import psycopg2
 from instruments import app
+import codecs
 
 import datetime
 
@@ -51,21 +52,22 @@ def log_request(request_url, remote_addr, user_agent, referrer):
     
     
 def get_visit_totals():
-    ever = get_visit_total_between()
     today = datetime.date.today()
+    end_of_today = datetime.date.today().strftime('%Y-%m-%d 23:59:59')
     last_month = today - datetime.timedelta(31)
-    last_month = get_visit_total_between(last_month.strftime('%Y-%m-01'), today.strftime('%Y-%m-01'))
-    this_month = get_visit_total_between(today.strftime('%Y-%m-01'))
-    today = get_visit_total_between(today.strftime('%Y-%m-%d'))
     
-    return (ever, last_month, this_month, today)
+    visits_ever = get_visit_total_between('2012-08-29', end_of_today)
+    
+    visits_last_month = get_visit_total_between(last_month.strftime('%Y-%m-01'), today.strftime('%Y-%m-01'))
+    visits_this_month = get_visit_total_between(today.strftime('%Y-%m-01'), end_of_today)
+    visits_today = get_visit_total_between(today.strftime('%Y-%m-%d'), end_of_today)
+    
+    return (visits_ever, visits_last_month, visits_this_month, visits_today)
     
     
-def get_visit_total_between(start_date='2012-08-29', end_date=datetime.date.today().strftime('%Y-%m-%d 23:59:59')):
+def get_visit_total_between(start_date, end_date):
     conn = connect()
     curs = conn.cursor()
-    
-    print "Dates: %s - %s" % (start_date, end_date)
     
     query = """
         SELECT count(request_id)
