@@ -91,22 +91,72 @@ def get_visit_total_between(start_date, end_date):
 def get_page_visits():
     conn = connect()
     curs = conn.cursor()
-
-    query = """
-        SELECT request_url, count(request_id) AS number_of_requests
-        FROM requests 
-        GROUP BY request_url 
-        ORDER BY number_of_requests DESC;
-    """
     
+    query = """select distinct substring(request_url, 0, position('/' in substring(request_url, 8))+7)
+               from requests;"""
+               
     curs.execute(query)
-    results = curs.fetchall()
+    sites = curs.fetchall()
+    
+    visits = {}
+    
+    for site in sites:
+        root_url = site[0]
+        
+        query = """
+                SELECT substring(request_url, position('/' in substring(request_url, 8))+7) as request_url, 
+                        count(request_id) AS number_of_requests
+                FROM requests
+                WHERE request_url LIKE %s
+                GROUP BY request_url 
+                ORDER BY number_of_requests DESC;
+        """
+    
+        curs.execute(query, (root_url+'%',))
+        visits[root_url] = curs.fetchall()
     
     conn.rollback()
     curs.close()
     conn.close()
     
-    return results
+    return visits
+    
+    
+def get_referrers():
+    conn = connect()
+    curs = conn.cursor()
+    
+    query = """select distinct substring(request_url, 0, position('/' in substring(request_url, 8))+7)
+               from requests;"""
+               
+    curs.execute(query)
+    sites = curs.fetchall()
+    
+    referrers = {}
+    
+    for site in sites:
+        root_url = site[0]
+        
+        query = """
+                SELECT substring(request_url, position('/' in substring(request_url, 8))+7) as request_url, 
+                        referrer
+                FROM requests
+                WHERE request_url LIKE %(site)s
+                AND referrer NOT LIKE ''
+                AND referrer NOT LIKE %(site)s
+                AND referrer NOT LIKE '%%.google.%%'
+                GROUP BY referrer, request_url
+                ORDER BY request_url;
+        """
+        
+        curs.execute(query, {'site': root_url+'%'})
+        referrers[root_url] = curs.fetchall()
+    
+    conn.rollback()
+    curs.close()
+    conn.close()
+    
+    return referrers
     
 
 def get_search_strings():

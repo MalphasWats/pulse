@@ -12,8 +12,9 @@ import database
 def index():
     return render_template('pulse.html',
                            visits=database.get_visit_totals(),
+                           referrers=database.get_referrers(),
                            pages=database.get_page_visits(),
-                           requests=database.get_requests(),
+                           requests=[],#database.get_requests(),
                            search_terms=database.get_search_strings()
                            )
     
