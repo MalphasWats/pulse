@@ -189,6 +189,43 @@ def get_search_strings():
     return results
     
     
+def get_requests_today():
+    conn = connect()
+    
+    curs = conn.cursor()
+    
+    today = datetime.date.today().strftime('%Y-%m-%d 00:00:00')
+    end_of_today = datetime.date.today().strftime('%Y-%m-%d 23:59:59')
+    
+    query = """select distinct substring(request_url, 0, position('/' in substring(request_url, 8))+7)
+               from requests;"""
+               
+    curs.execute(query)
+    sites = curs.fetchall()
+    
+    requests = {}
+    
+    for site in sites:
+        root_url = site[0]
+        
+        query = """
+                SELECT substring(request_url, position('/' in substring(request_url, 8))+7) as request_url, 
+                        timestamp, remote_addr
+                FROM requests
+                WHERE request_url LIKE %(site)s
+                AND timestamp > %(today)s
+                AND timestamp < %(end_of_today)s
+                ORDER BY timestamp;
+        """
+        
+        curs.execute(query, {'site': root_url+'%', 'today': today, 'end_of_today':end_of_today})
+        requests[root_url] = curs.fetchall()
+    
+    conn.rollback()
+    curs.close()
+    conn.close()
+    
+    return requests
     
     
 def get_requests():
