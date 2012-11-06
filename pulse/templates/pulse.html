@@ -32,12 +32,12 @@
         {% endfor %}
     </table>
     
-    <h2>Referrers</h2>
-    <table style="font-size:10pt">
+    <h2>Referrers (non-search)</h2>
+    <table style="font-size:8.5pt">
         {% for site in referrers.keys() %}
         {% if referrers[site] %}
-            <tr><th colspan="2">{{site}}</th></tr>
-            <tr><th>Page</th><th>Referrer</th></tr>
+            <tr><th colspan="3">{{site}}</th></tr>
+            <tr><th>Page</th><th>Referrer</th><th>Timestamp</th></tr>
             {% for p in referrers[site] %}
                 <tr>
                 {% if p[0]|length > 35 %}
@@ -51,7 +51,8 @@
                 {% else %}
                 <td>{{p[1]}}
                 {% endif %}
-                </td></tr>
+                </td>
+                <td>{{p[2].strftime('%Y-%m-%d %H:%M:%S')}}</td></tr>
             {% endfor %}
         {% endif %}
         {% endfor %}

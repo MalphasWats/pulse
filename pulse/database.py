@@ -139,14 +139,15 @@ def get_referrers():
         
         query = """
                 SELECT substring(request_url, position('/' in substring(request_url, 8))+7) as request_url, 
-                        referrer
+                        referrer, timestamp
                 FROM requests
                 WHERE request_url LIKE %(site)s
                 AND referrer NOT LIKE ''
                 AND referrer NOT LIKE %(site)s
                 AND referrer NOT LIKE '%%.google.%%'
-                GROUP BY referrer, request_url
-                ORDER BY request_url;
+                AND referrer NOT LIKE '%%.bing.%%'
+                AND referrer NOT LIKE '%%.baidu.%%'
+                ORDER BY timestamp DESC;
         """
         
         curs.execute(query, {'site': root_url+'%'})
