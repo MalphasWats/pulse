@@ -37,6 +37,7 @@ def log_request():
 
     return r
     
+    
 @blueprint.route('/a/')
 @public_endpoint
 def analytics():
@@ -44,3 +45,7 @@ def analytics():
     r.mimetype='text/javascript'
 
     return r
+    
+    
+def get_content_widget():
+    return render_template('content_widget.html', visits=database.get_visit_totals())

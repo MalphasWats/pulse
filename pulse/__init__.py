@@ -6,3 +6,5 @@ LABEL = 'Pulse'
 ICON = 'bar-chart'
 
 import pulse.core
+
+from pulse.core import get_content_widget
