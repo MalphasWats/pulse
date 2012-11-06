@@ -215,7 +215,7 @@ def get_requests_today():
                 WHERE request_url LIKE %(site)s
                 AND timestamp > %(today)s
                 AND timestamp < %(end_of_today)s
-                ORDER BY timestamp;
+                ORDER BY timestamp DESC;
         """
         
         curs.execute(query, {'site': root_url+'%', 'today': today, 'end_of_today':end_of_today})
