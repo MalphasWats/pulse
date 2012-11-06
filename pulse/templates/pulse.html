@@ -19,12 +19,13 @@
             <tr><th>Page</th><th>IP Address</th><th>Timestamp</th></tr>
             {% for p in pages_today[site] %}
                 <tr>
+                <td><a href="{{site}}{{p[0]}}" onclick="return false;">
                 {% if p[0]|length > 35 %}
-                <td title="{{p[0]}}">{{p[0][:34]}}...
+                    {{p[0][:34]}}...
                 {% else %}
-                <td>{{p[0]}}
+                    {{p[0]}}
                 {% endif %}
-                </td>
+                </a></td>
                 <td>{{p[2]}}</td>
                 <td>{{p[1].strftime('%Y-%m-%d %H:%M:%S')}}</td></tr>
             {% endfor %}
@@ -40,18 +41,20 @@
             <tr><th>Page</th><th>Referrer</th><th>Timestamp</th></tr>
             {% for p in referrers[site] %}
                 <tr>
+                <td><a href="{{site}}{{p[0]}}" onclick="return false;">
                 {% if p[0]|length > 35 %}
-                <td title="{{p[0]}}">{{p[0][:34]}}...
+                    {{p[0][:34]}}...
                 {% else %}
-                <td>{{p[0]}}
+                    {{p[0]}}
                 {% endif %}
-                </td>
+                </a></td>
+                <td><a href="{{p[1]}}" onclick="return false;">
                 {% if p[1]|length > 35 %}
-                <td title="{{p[1]}}">{{p[1][:34]}}...
+                    {{p[1][:34]}}...
                 {% else %}
-                <td>{{p[1]}}
+                    {{p[1]}}
                 {% endif %}
-                </td>
+                </a></td>
                 <td>{{p[2].strftime('%Y-%m-%d %H:%M:%S')}}</td></tr>
             {% endfor %}
         {% endif %}
