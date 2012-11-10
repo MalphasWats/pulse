@@ -27,8 +27,9 @@ def log_request():
     remote_addr = request.remote_addr
     user_agent = request.headers['User-Agent']
     referrer = request.args.get('referrer')
-        
-    database.log_request(request_url, remote_addr, user_agent, referrer)
+    
+    if request_url:
+        database.log_request(request_url, remote_addr, user_agent, referrer)
     
     r = make_response(blueprint.send_static_file('pulse.gif'))
     r.headers.add('Last-Modified', datetime.datetime.now())
