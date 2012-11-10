@@ -72,22 +72,6 @@
         {% endfor %}
     </table>
     
-    
-    <h2>Raw Data</h2>
-    <table style="font-size:50%;">
-    <tr><th>Request ID</th><th>Request URL</th><th>Referrer</th><th>Remote Address</th><th>User Agent</th><th>Timestamp</th></tr>
-    {% for r in requests %}
-        <tr>
-            <td>{{r[0]}}</td>
-            <td>{{r[1]}}</td>
-            <td style="word-wrap:break-word; max-width:300px;">{{r[4]}}</td>
-            <td>{{r[2]}}</td>
-            <td>{{r[3]}}</td>
-            <td>{{r[5]}}</td>
-        </tr>
-    {% endfor %}
-        
-    </table>
 {% endblock %}
 
 {% block sidebar %}

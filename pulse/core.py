@@ -15,9 +15,8 @@ def index():
                            pages_today=database.get_requests_today(),
                            referrers=database.get_referrers(),
                            pages=database.get_page_visits(),
-                           requests=[],#database.get_requests(),
                            search_terms=database.get_search_strings()
-                           )
+                          )
     
 
 @blueprint.route('/log/')
