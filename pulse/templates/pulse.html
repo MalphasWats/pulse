@@ -67,7 +67,14 @@
             <tr><th colspan="2">{{site}}</th></tr>
             <tr><th>URL</th><th>Visits</th></tr>
             {% for p in pages[site] %}
-                <tr><td>{{p[0]}}</td><td>{{p[1]}}</td></tr>
+                <tr><td><a href="{{site}}{{p[0]}}" onclick="return false;">
+                {% if p[0]|length > 75 %}
+                    {{p[0][:74]}}...
+                {% else %}
+                    {{p[0]}}
+                {% endif %}
+                </a></td>
+                <td>{{p[1]}}</td></tr>
             {% endfor %}
         {% endfor %}
     </table>
