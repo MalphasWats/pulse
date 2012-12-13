@@ -48,4 +48,4 @@ def analytics():
     
     
 def get_content_widget():
-    return render_template('content_widget.html', visits=database.get_visit_totals())
+    return render_template('pulse_content_widget.html', visits=database.get_visit_totals())
