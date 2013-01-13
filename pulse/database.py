@@ -168,7 +168,7 @@ def get_search_strings():
 
     query = """SELECT queries, count(queries) AS count
         FROM
-           (SELECT replace(replace(substring(q_string, 3), '+', ' '), '%20', ' ') AS queries
+           (SELECT regexp_split_to_table(replace(replace(substring(q_string, 3), '+', ' '), '%20', ' '), E' ') AS queries
             FROM (
                 SELECT regexp_split_to_table(referrer, E'&+') AS q_string
                 FROM requests
@@ -177,8 +177,10 @@ def get_search_strings():
             AS q_strings
             WHERE q_string LIKE 'q=%')
         AS query_strings
+        WHERE length(queries) > 3
         GROUP BY queries
-        ORDER BY count DESC, queries;"""
+        ORDER BY count DESC, queries
+        LIMIT 20;"""
     
     curs.execute(query)
     results = curs.fetchall()
